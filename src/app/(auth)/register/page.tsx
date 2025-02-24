@@ -21,8 +21,8 @@ const Register = () => {
           {state?.errors.email && <p className="error">{state.errors.email}</p>}
         </div>
         <div>
-          <label htmlFor="password">Passowrd</label>
-          <input type="password" name="passowrd" />
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" />
           {state?.errors.password && (
             <div className="error">
               <p>password must:</p>
@@ -35,8 +35,8 @@ const Register = () => {
           )}
         </div>
         <div>
-          <label htmlFor="repeatPassowrd">Repeat password</label>
-          <input type="password" name="repeatPassowrd" />
+          <label htmlFor="repeatPassword">Repeat password</label>
+          <input type="password" name="repeatPassword" />
           {state?.errors.repeatPassword && (
             <p className="error">{state.errors.repeatPassword}</p>
           )}

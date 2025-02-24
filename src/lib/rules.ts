@@ -6,7 +6,7 @@ export const registerFormSchema = z
     password: z
       .string()
       .min(1, { message: "Not be empty" })
-      .max(5, { message: "Be at least 5 characters long" })
+      .max(16, { message: "Not be more then 16 characters long" })
       .regex(/[a-zA-Z]/, { message: "Contain at least one letter" })
       .regex(/[0-9]/, { message: "Contain at least one number" })
       .regex(/[^a-zA-Z0-9]/, {

@@ -1,6 +1,9 @@
 "use server";
 
+import { getCollection } from "@/lib/db";
 import { registerFormSchema } from "@/lib/rules";
+import bcrypt from "bcrypt";
+import { redirect } from "next/navigation";
 
 export const register = async (state, formData: FormData) => {
   const validatedFields = registerFormSchema.safeParse({
@@ -14,4 +17,23 @@ export const register = async (state, formData: FormData) => {
       email: formData.get("email"),
       errors: validatedFields.error.flatten().fieldErrors,
     };
+
+  const { email, password } = validatedFields.data;
+
+  const userCollection = await getCollection("users");
+
+  if (!userCollection) return { errors: { email: "server error!" } };
+
+  const existingUser = await userCollection.findOne({ email });
+  if (existingUser)
+    return { error: { email: "Email alreadt exist in our database" } };
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const reseults = await userCollection?.insertOne({
+    email,
+    password: hashedPassword,
+  });
+
+  redirect("/dashboard");
 };

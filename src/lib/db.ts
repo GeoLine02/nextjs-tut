@@ -1,3 +1,4 @@
+import "server-only";
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 if (!process.env.DB_URI) {
@@ -12,11 +13,11 @@ const client = new MongoClient(process.env.DB_URI, {
   },
 });
 
-const getDB = async (dbNmae: string) => {
+const getDB = async (dbName: string) => {
   try {
     await client.connect();
     console.log("Connected To Database");
-    return client.db(dbNmae);
+    return client.db(dbName);
   } catch (err) {
     console.log(err);
   }

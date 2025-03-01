@@ -23,7 +23,10 @@ export const register = async (state, formData: FormData) => {
 
   const userCollection = await getCollection("users");
 
-  if (!userCollection) return { errors: { email: "server error!" } };
+  if (!userCollection)
+    return {
+      errors: { email: "server error!", password: [], repeatPassword: "" },
+    };
 
   const existingUser = await userCollection.findOne({ email });
   if (existingUser)

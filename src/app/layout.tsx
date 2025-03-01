@@ -1,5 +1,5 @@
-import Link from "next/link";
 import "./globals.css";
+import Navigation from "@/components/Navigation";
 
 export default function RootLayout({
   children,
@@ -10,20 +10,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <header>
-          <nav>
-            <Link className="nav-link" href={"/"}>
-              Home
-            </Link>
-            <div>
-              <Link className="nav-link" href={"/register"}>
-                Register
-              </Link>
-
-              <Link className="nav-link" href={"/dashboard"}>
-                Dashboard
-              </Link>
-            </div>
-          </nav>
+          <Navigation />
         </header>
         <main>{children}</main>
         <footer>footer</footer>

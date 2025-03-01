@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { register } from "@/actions/auth";
@@ -18,16 +19,18 @@ const Register = () => {
             name="email"
             defaultValue={state?.email as string}
           />
-          {state?.errors.email && <p className="error">{state.errors.email}</p>}
+          {state?.errors?.email && (
+            <p className="error">{state.errors.email}</p>
+          )}
         </div>
         <div>
           <label htmlFor="password">Password</label>
           <input type="password" name="password" />
-          {state?.errors.password && (
+          {state?.errors?.password && (
             <div className="error">
               <p>password must:</p>
               <ul className="list-disc list-inside ml-4">
-                {state.errors.password.map((error) => (
+                {state.errors?.password.map((error: any) => (
                   <li key={error}>{error}</li>
                 ))}
               </ul>
@@ -37,7 +40,7 @@ const Register = () => {
         <div>
           <label htmlFor="repeatPassword">Repeat password</label>
           <input type="password" name="repeatPassword" />
-          {state?.errors.repeatPassword && (
+          {state?.errors?.repeatPassword && (
             <p className="error">{state.errors.repeatPassword}</p>
           )}
         </div>

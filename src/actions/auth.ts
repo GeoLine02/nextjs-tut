@@ -4,6 +4,7 @@ import { getCollection } from "@/lib/db";
 import { loginFormSchema, registerFormSchema } from "@/lib/rules";
 import { createSession } from "@/lib/sessions";
 import bcrypt from "bcrypt";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const register = async (state, formData: FormData) => {
@@ -80,4 +81,10 @@ export const login = async (state, formData: FormData) => {
   await createSession(existingUser._id.toString());
 
   redirect("/dashboard");
+};
+
+export const logOut = async () => {
+  const cookieStore = await cookies();
+  cookieStore.delete("session");
+  redirect("/");
 };
